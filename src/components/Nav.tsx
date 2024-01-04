@@ -28,17 +28,22 @@ function Nav() {
         ) : (
           <>
           <div className="fixed z-10 self-center group ml-6">
-                <button onClick={navClick} className="btn btn-ghost mb-3 flex scale-90">
+                <button onClick={navClick} className={`btn btn-ghost hover:bg-transparent mb-3 flex scale-90 md:scale-75 ${clicked ? "opacity-90 shadow-white drop-shadow-[0_0_4px_rgba(255,255,255,1)]" : ""}`}>
                   <div className={`absolute duration-500 delay-200 ${clicked ? "-mt-1":""} z-40  w-6 h-6 rotate-[135deg] skew-x-[20deg] skew-y-[20deg] bg-secondary border-black border-solid border-[1px]`}></div>
                   <div className={`absolute z-20 top-4 w-6 h-6 rotate-[135deg] skew-x-[20deg] skew-y-[20deg] bg-primary border-black border-solid border-[1px]`}></div>
                   <div className={`absolute duration-500 delay-200 ${clicked ? "mt-1":""} z-10 top-5 w-6 h-6 rotate-[135deg] skew-x-[20deg] skew-y-[20deg] bg-accent border-black border-solid border-[1px]`}></div>
                 </button>
               </div>
-          <nav className={`w-auto fixed bg-base-300 h-full p-6 duration-700 ${clicked ? "" : "-ml-32 delay-200"}`}>
-            <ul className="relative h-full flex flex-col items-center">
-              <li className="mt-24  tooltip tooltip-right" data-tip="To-do list">
+          <nav className={`w-auto flex flex-col justify-center py-16 fixed bg-base-300 h-full p-6 duration-700 ${clicked ? "" : "-ml-32 delay-200"}`}>
+            <ul className="relative flex flex-col items-center">
+              <li className="tooltip tooltip-right mb-4" data-tip="Home">
+              <NavLink to="/" className="group " onClick={Refresh}>
+          <svg className="fill-current duration-75 group-hover:border-b-2 border-solid group-hover:border-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM11 13V19H13V13H11Z"></path></svg>
+          </NavLink>
+              </li>
+              <li className="tooltip tooltip-right" data-tip="To-do list">
                 <NavLink
-                  className="btn hover:bg-indigo-500/90 btn-circle btn-sm glass bg-indigo-500 hover:scale-105 mb-4"
+                  className="btn btn-secondary btn-circle btn-sm glass bg-secondary hover:scale-105 mb-4"
                   to="/todo"
                   onClick={Refresh}
                 >
@@ -57,7 +62,7 @@ function Nav() {
               </li>
               <li className="tooltip tooltip-right" data-tip="Note">
                 <NavLink
-                  className="btn btn-primary btn-circle btn-sm glass bg-sky-500 hover:scale-105 mb-4"
+                  className="btn btn-primary btn-circle btn-sm glass bg-primary hover:scale-105 mb-4"
                   to="/note"
                   onClick={Refresh}
                 >
@@ -90,6 +95,9 @@ function Nav() {
                 </NavLink>
               </li>
             </ul>
+            <NavLink to="/" className="invisible" onClick={Refresh}>
+          <svg className="fill-accent border-b-2 border-solid border-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"><path d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM11 13V19H13V13H11Z"></path></svg>
+          </NavLink>
           </nav></>
         )}
         <Routes>
