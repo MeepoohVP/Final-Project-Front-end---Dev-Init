@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 function Todo() {
-  const [status, setStatus] = useState(false);
-  const [isEditing, setEditing] = useState(false);
-  const [currentTodo, setCurrentTodo] = useState({});
+  type Todo = {
+    id: number;
+    text: string;
+    checked: boolean;
+    // include other properties of the todo object
+};
+  const [isEditing, setEditing] = useState<boolean>(false);
+  const [currentTodo, setCurrentTodo] = useState<any>({});
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos");
     if (savedTodos) {
@@ -11,7 +16,7 @@ function Todo() {
       return [];
     }
   });
-  const [todo, setTodo] = useState("");
+  const [todo, setTodo] = useState<string>("");
   
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -30,16 +35,16 @@ function Todo() {
     setCurrentTodo({ ...todo });
   };
   const handleUpdateTodo = (id: number, updateTodo: object): void => {
-    const updateItem = todos.map((todo: any) => {
+    const updateItem = todos.map((todo: Todo) => {
       return todo.id === id ? updateTodo : todo;
     });
     setEditing(false);
     setTodos(updateItem);
   };
+  
   const handleEditFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleUpdateTodo(currentTodo.id, currentTodo);
-    console.log(currentTodo.id);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +71,7 @@ function Todo() {
     }
   };
   const deleteData = (id: number) => {
-    const removeItem = todos.filter((todo: any) => {
+    const removeItem = todos.filter((todo: Todo) => {
       return todo.id !== id;
     });
     setTodos(removeItem);
@@ -75,7 +80,6 @@ function Todo() {
     const newTodos = [...todos];
     newTodos[index].checked = !newTodos[index].checked;
     setTodos(newTodos);
-    setStatus(current => !current);
   }
 
   return (
@@ -116,7 +120,7 @@ function Todo() {
         />
       </form>
       <ul className="todo-list mt-2 w-1/2 mx-auto">
-        {todos.map((todo) => (
+        {todos.map((todo :Todo) => (
           <li
             key={todo.id} value={todo.id}
             className={`mb-12 flex items-center justify-center`}
