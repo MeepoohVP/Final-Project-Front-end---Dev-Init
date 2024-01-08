@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 function Todo() {
   type Todo = {
     id: number;
@@ -16,7 +16,7 @@ function Todo() {
       return [];
     }
   });
-  const [todo, setTodo] = useState<string>("");
+  const [todo, setTodo] = useState("");
   
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -51,6 +51,7 @@ function Todo() {
     setTodo(e.target.value);
     e.target.value = "";
   };
+  var id = 0;
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,14 +59,12 @@ function Todo() {
       setTodos([
         ...todos,
         {
-          id: todos.length + 1,
+          id: Math.random(),
           text: todo.trim(),
           checked: false,
         },
       ]);
       setTodo("");
-      
-      
     } else {
       setTodo("");
     }
@@ -80,8 +79,8 @@ function Todo() {
     const newTodos = [...todos];
     newTodos[index].checked = !newTodos[index].checked;
     setTodos(newTodos);
+    console.log(index);
   }
-
   return (
     <>
       <main className="relative" id="myTodo">
@@ -120,15 +119,15 @@ function Todo() {
         />
       </form>
       <ul className="todo-list mt-2 w-1/2 mx-auto">
-        {todos.map((todo :Todo) => (
+        {todos.map((todo :Todo, index: number) => (
           <li
-            key={todo.id} value={todo.id}
+            key={index} value={todo.id}
             className={`mb-12 flex items-center justify-center`}
           >
             {" "}
-            <input key={todo.id} value={todo.id} type="checkbox" checked = {todo.checked}
-            className={`checkbox checkbox-sm mr-2`} onChange={() => handleCheckedbox(todo.id-1)} />{" "}
-            <p className="flex-1">{todo.text}</p>
+            <input key={index} value={todo.id} type="checkbox" checked = {todo.checked}
+            className={`checkbox checkbox-sm mr-2 ${todo.checked ? "opacity-30" : ""}`} onChange={() => handleCheckedbox(index)} />{" "}
+            <p className={`flex-1 ${todo.checked ? "opacity-30 line-through" : ""}`}>{todo.text}</p>
             <div className="dropdown lg:hidden">
               <div role="button" className="btn btn-ghost" tabIndex={0}>
               <svg
