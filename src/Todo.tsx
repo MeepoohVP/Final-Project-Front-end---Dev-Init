@@ -5,7 +5,7 @@ function Todo() {
     text: string;
     checked: boolean;
     // include other properties of the todo object
-};
+  };
   const [isEditing, setEditing] = useState<boolean>(false);
   const [currentTodo, setCurrentTodo] = useState<any>({});
   const [todos, setTodos] = useState(() => {
@@ -17,11 +17,10 @@ function Todo() {
     }
   });
   const [todo, setTodo] = useState("");
-  
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
-
 
   const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentTodo({
@@ -41,7 +40,7 @@ function Todo() {
     setEditing(false);
     setTodos(updateItem);
   };
-  
+
   const handleEditFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleUpdateTodo(currentTodo.id, currentTodo);
@@ -74,19 +73,20 @@ function Todo() {
     });
     setTodos(removeItem);
   };
-  const handleCheckedbox = (index: number) =>{
+  const handleCheckedbox = (index: number) => {
     const newTodos = [...todos];
     newTodos[index].checked = !newTodos[index].checked;
     setTodos(newTodos);
     console.log(index);
-  }
+  };
   return (
     <>
       <main className="relative" id="myTodo">
         <h1 className="text-center font-bold text-3xl">To-do list</h1>
       </main>
       {isEditing ? (
-        <form id="myform"
+        <form
+          id="myform"
           onSubmit={handleEditFormSubmit}
           className={`fixed w-full h-full left-0 top-0 bg-black/40`}
         >
@@ -109,7 +109,7 @@ function Todo() {
       )}
       <form className="text-center" onSubmit={handleFormSubmit}>
         <input
-        className="input input-bordered input-sm my-6"
+          className="input input-bordered input-sm my-6"
           type="text"
           name="todo"
           placeholder="Create a new todo"
@@ -118,31 +118,56 @@ function Todo() {
         />
       </form>
       <ul className="todo-list mt-2 w-1/2 mx-auto">
-        {todos.map((todo :Todo, index: number) => (
+        {todos.map((todo: Todo, index: number) => (
           <li
-            key={index} value={todo.id}
+            key={index}
+            value={todo.id}
             className={`mb-12 flex items-center justify-center`}
           >
             {" "}
-            <input key={index} value={todo.id} type="checkbox" checked = {todo.checked}
-            className={`checkbox checkbox-sm mr-2 ${todo.checked ? "opacity-30" : ""}`} onChange={() => handleCheckedbox(index)} />{" "}
-            <p className={`flex-1 ${todo.checked ? "opacity-30 line-through" : ""}`}>{todo.text}</p>
+            <input
+              key={index}
+              value={todo.id}
+              type="checkbox"
+              checked={todo.checked}
+              className={`checkbox checkbox-sm mr-2 ${
+                todo.checked ? "opacity-30" : ""
+              }`}
+              onChange={() => handleCheckedbox(index)}
+            />{" "}
+            <p
+              className={`flex-1 ${
+                todo.checked ? "opacity-30 line-through" : ""
+              }`}
+            >
+              {todo.text}
+            </p>
             <div className="dropdown lg:hidden">
               <div role="button" className="btn btn-ghost" tabIndex={0}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-three-dots-vertical"
-                viewBox="0 0 16 16"
-              >
-                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-three-dots-vertical"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                </svg>
               </div>
-              <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-300 w-auto rounded-none">
-                <li className="btn btn-ghost" onClick={() => editClick(todo)}>edit</li>
-                <li className="btn btn-ghost" onClick={() => deleteData(todo.id)}>delete</li>
+              <ul
+                tabIndex={0}
+                className="p-2 shadow menu dropdown-content z-[1] bg-base-300 w-auto rounded-none"
+              >
+                <li className="btn btn-ghost" onClick={() => editClick(todo)}>
+                  edit
+                </li>
+                <li
+                  className="btn btn-ghost"
+                  onClick={() => deleteData(todo.id)}
+                >
+                  delete
+                </li>
               </ul>
             </div>{" "}
             <button
