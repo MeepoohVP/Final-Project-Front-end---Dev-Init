@@ -51,7 +51,6 @@ function Todo() {
     setTodo(e.target.value);
     e.target.value = "";
   };
-  var id = 0;
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
