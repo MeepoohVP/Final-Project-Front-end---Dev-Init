@@ -57,7 +57,7 @@ function Todo() {
       setTodos([
         ...todos,
         {
-          id: Math.random(),
+          id: (Math.random() * 100).toFixed(0),
           text: todo.trim(),
           checked: false,
         },

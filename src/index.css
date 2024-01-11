@@ -4,3 +4,6 @@
 #layerTop, #layerMiddle, #layerBottom{
     animation-fill-mode: both;
 }
+body, #root{
+    @apply bg-base-300;
+}

@@ -13,7 +13,7 @@ function Loading() {
     <>
       {loading ? (
         <div
-          className={`bg-base-100 z-20 group duration-500 w-full h-full flex flex-col items-center justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-120`}
+          className={`bg-base-300 z-[100] group duration-500 w-full h-full flex flex-col items-center justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-120`}
         >
           <div
             id="layerTop"
