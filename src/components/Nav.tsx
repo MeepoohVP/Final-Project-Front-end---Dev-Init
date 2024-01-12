@@ -16,7 +16,7 @@ function Nav() {
       window.location.reload();
     }
   };
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState<boolean>(false);
   const navClick = (): void => {
     setClicked((current) => !current);
   };
@@ -56,12 +56,12 @@ function Nav() {
               </button>
             </NavLink>
             <nav
-              className={`z-10 border-t-[1px] border-t-solid border-t-white/10 flex w-full justify-center fixed bottom-0 bg-base-300 h-auto p-6 duration-700 shadow-[0_0_16px_0_rgba(255,255,255,0.2)] lg:bg-base-200 lg:bottom-auto lg:w-auto lg:h-full lg:items-center`}
+              className={`z-10 border-t-[1px] border-t-solid border-t-white/10 flex w-full justify-center fixed bottom-0 bg-base-300 h-auto px-6 py-3 duration-700 slg:hadow-[0_0_16px_0_rgba(255,255,255,0.2)] lg:bg-base-200 lg:bottom-auto lg:w-auto lg:h-full lg:items-center`}
             >
               <ul className="relative flex items-center justify-between lg:justify-start w-full lg:flex-col gap-4">
                 <li className="text-center">
                   <NavLink
-                    className="btn btn-secondary btn-square btn-sm glass bg-secondary hover:scale-105"
+                    className={`btn btn-secondary btn-square btn-sm glass bg-secondary hover:scale-105`}
                     to="/todo"
                   >
                     <svg
@@ -76,7 +76,7 @@ function Nav() {
                       />
                     </svg>
                   </NavLink>
-                  <div className="text-white lg:hidden text-xs">Todo-list</div>
+                  <div className="text-white lg:hidden text-xs mt-1">Todo-list</div>
                 </li>
                 <li className="text-center">
                   <NavLink
@@ -93,7 +93,7 @@ function Nav() {
                       <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177z" />
                     </svg>
                   </NavLink>
-                  <div className="text-white lg:hidden text-xs">Note</div>
+                  <div className="text-white lg:hidden text-xs mt-1">Note</div>
                 </li>
                 <li className="text-center">
                   <NavLink
@@ -110,7 +110,7 @@ function Nav() {
                       <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5M8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
                     </svg>
                   </NavLink>
-                  <div className="text-white lg:hidden text-xs">Schedule</div>
+                  <div className="text-white lg:hidden text-xs mt-1">Schedule</div>
                 </li>
               </ul>
             </nav>

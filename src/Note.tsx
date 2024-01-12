@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 function Note() {
-  const getDate = ():string => {
+  const getDate = (): string => {
     if (new Date().getDate().toString().length === 1) {
-      return '0' + (new Date().getDate()).toString();
+      return "0" + new Date().getDate().toString();
     }
     return new Date().getDate().toString();
-  }
-  const getMonth =():string => {
-    if ((new Date().getMonth().toString()).length === 1) {
+  };
+  const getMonth = (): string => {
+    if (new Date().getMonth().toString().length === 1) {
       return "0" + (new Date().getMonth() + 1).toString();
     }
     return (new Date().getMonth() + 1).toString();
-    
-  }
-  const getYear = ():string => {
+  };
+  const getYear = (): string => {
     return new Date().getFullYear().toString();
-  }
+  };
   type NoteApp = {
     id: number;
     text: string;
@@ -55,7 +54,7 @@ function Note() {
       date: getDate() + "/" + getMonth() + "/" + getYear(),
     });
     console.log("Current todo: ", currentNote);
-  }
+  };
   const editClick = (note: object): void => {
     setEditing(true);
     setCurrentNote({ ...note });
@@ -73,7 +72,9 @@ function Note() {
     handleUpdateNote(currentNote.id, currentNote);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setNote(e.target.value);
     e.target.value = "";
   };
@@ -97,8 +98,8 @@ function Note() {
       ]);
       setNote("");
       setTopic("");
-    } 
-    if (note!=="" && topic==="") {
+    }
+    if (note !== "" && topic === "") {
       setNotes([
         ...notes,
         {
@@ -110,8 +111,7 @@ function Note() {
       ]);
       setNote("");
       setTopic("");
-    }
-    else {
+    } else {
       setNote("");
       setTopic("");
     }
@@ -124,10 +124,11 @@ function Note() {
   };
   return (
     <>
-      <button className="btn btn-primary btn-circle fixed bottom-[112px] right-0 m-4 lg:bottom-0"
-      onClick= {() => {
-        setShowForm("block");
-      }}
+      <button
+        className="btn btn-primary btn-circle fixed bottom-[84px] right-0 m-4 lg:bottom-0 z-20"
+        onClick={() => {
+          setShowForm("block");
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -136,121 +137,183 @@ function Note() {
           fill="currentColor"
           className="bi bi-plus"
           viewBox="0 0 16 16"
-
         >
           <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
         </svg>
       </button>
       <header className="relative flex justify-center pt-2">
-        <h1 className="text-center font-bold text-3xl lg:text-5xl bg-clip-text bg-gradient-to-r from-primary to-accent text-transparent">Note</h1>
+        <h1 className="text-center font-bold text-3xl lg:text-5xl bg-clip-text bg-gradient-to-r from-primary to-accent text-transparent">
+          Note
+        </h1>
       </header>
       {notes.length === 0 ? (
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl">ไม่มีโน้ต</div>
-      ) : ""}
-      {isEditing ? (
-        <div className={`fixed w-full h-full z-20 bg-base-300/70 top-0`}>
-        <form
-          onSubmit={handleEditFormSubmit}
-          className={`bg-base-300 p-3 z-20 w-full h-full lg:h-auto lg:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
-        >
-        <button className="self-end" type="submit">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-check" viewBox="0 0 16 16">
-  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-</svg>
-        </button>
-          <input
-          className="input input-ghost focus:outline-none focus:border-transparent focus:bg-base-200 rounded-none my-6 text-3xl"
-          type="text"
-          name="topic"
-          placeholder="Topic"
-          value={currentNote.topic}
-          onChange={handleEditTopicChange}
-        />
-            <textarea
-              name="edit note"
-              onChange={handleEditInputChange}
-              className="textarea textarea-ghost resize-none h-full focus:bg-base-200 focus:border-transparent focus:outline-none"
-              placeholder="edit"
-              value={currentNote.text} rows={12}
-              autoFocus={true}
-            />
-            <button className="btn btn-error w-fit mx-auto mt-4 " onClick={() => setEditing(false)}>cancel</button>
-        </form></div>
+        <div className="absolute w-full h-full top-0 -z-10 flex flex-col items-center justify-center">
+          <div className="relative">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="96"
+              height="96"
+              fill="currentColor"
+              className="bi bi-sticky-fill opacity-20"
+              viewBox="0 0 16 16"
+            >
+              <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177z" />
+            </svg>
+          </div>
+          <div className="text-2xl opacity-40 mt-6 relative">ไม่มีโน้ต</div>
+        </div>
       ) : (
         ""
       )}
-      <div className={`fixed top-0 w-full h-full z-20 ${showForm} bg-base-300/70`}>
-      <form
-        className={`bg-base-100 p-3 w-full h-full lg:h-auto lg:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:rounded-xl lg:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}
-        onSubmit={handleFormSubmit}
-      >
-        <button className="self-end">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-check" viewBox="0 0 16 16">
-  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-</svg>
-        </button>
-        <input
-          className="input focus:outline-none focus:border-transparent rounded-none my-6 text-3xl"
-          type="text"
-          name="topic"
-          placeholder="Topic"
-          value={topic}
-          onChange={handleInputTopicChange}
-          autoFocus={true}
-        />
-        
-        <textarea
-          className="textarea textarea-ghost resize-none h-full"
-          placeholder=""
-          value={note} 
-          onChange={handleInputChange} rows={12}
-        ></textarea>
-        
-      </form></div>
-      <main className="flex justify-center">
-      <ul className="px-3 lg:px-0 mt-12 lg:flex lg:justify-start lg:flex-wrap lg:gap-8 flex-1 lg:mx-48">
-        {notes.map((note: NoteApp, index: number) => (
-          <li
-            
-            key={index}
-            value={note.id}
-            className={`mb-6 text-left relative card lg:w-[calc(50%-2rem)] 2xl:w-[calc(33.333333333%-2rem)] hover:scale-[1.02] duration-300`}
+      {isEditing ? (
+        <div className={`fixed w-full h-full z-20 bg-base-300/70 top-0`}>
+          <form
+            onSubmit={handleEditFormSubmit}
+            className={`bg-base-300 p-3 z-20 w-full h-full lg:h-auto lg:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
           >
-            <div className="relative w-full h-full bg-white/5 rounded-[16px] flex flex-col items-start p-4 cursor-pointer lg:pb-32" onClick={() => editClick(note)}>
-            <h3 className={`card-title lg:text-4xl`}>{note.topic}</h3>
-            <p className={`text-white/50`}>{note.text}</p>
-            <p className="text-white/50 text-sm lg:absolute lg:bottom-[12px]">{note.date}</p>
-            </div>
-            
-            <div className="dropdown dropdown-end dropdown-bottom absolute right-0 bg-transparent">
-              <div role="button" className="btn btn-ghost bg-transparent" tabIndex={0}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-three-dots-vertical"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                </svg>
-              </div>
-              <ul
-                tabIndex={0}
-                className="shadow dropdown-content z-[1] bg-base-200 w-[84px] rounded-box"
+            <button className="self-end" type="submit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="currentColor"
+                className="bi bi-check"
+                viewBox="0 0 16 16"
               >
-                <li
-                  className="btn btn-ghost btn-sm w-full rounded-box"
-                  onClick={() => deleteData(note.id)}
+                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+              </svg>
+            </button>
+            <input
+              className="input input-ghost focus:outline-none focus:border-transparent focus:bg-base-200 rounded-none my-6 lg:text-5xl"
+              type="text"
+              name="topic"
+              placeholder="Topic"
+              value={currentNote.topic}
+              onChange={handleEditTopicChange}
+            />
+            <textarea
+              name="edit note"
+              onChange={handleEditInputChange}
+              className="textarea textarea-ghost resize-none h-full focus:bg-base-200 focus:border-transparent focus:outline-none lg:text-xl"
+              placeholder="edit"
+              value={currentNote.text}
+              rows={12}
+              autoFocus={true}
+            />
+            <button
+              className="btn btn-error w-fit mx-auto mt-4 "
+              onClick={() => setEditing(false)}
+            >
+              cancel
+            </button>
+          </form>
+        </div>
+      ) : (
+        ""
+      )}
+      <div
+        className={`fixed top-0 w-full h-full z-20 ${showForm} bg-base-300/70`}
+      >
+        <form
+          className={`bg-base-100 p-3 w-full h-full lg:h-auto lg:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:rounded-xl lg:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}
+          onSubmit={handleFormSubmit}
+        >
+          <button className="self-end">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              className="bi bi-check"
+              viewBox="0 0 16 16"
+            >
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+            </svg>
+          </button>
+          <input
+            className="input focus:outline-none focus:border-transparent rounded-none my-6 text-3xl"
+            type="text"
+            name="topic"
+            placeholder="Topic"
+            value={topic}
+            onChange={handleInputTopicChange}
+            autoFocus={true}
+          />
+
+          <textarea
+            className="textarea textarea-ghost resize-none h-full"
+            placeholder=""
+            value={note}
+            onChange={handleInputChange}
+            rows={12}
+          ></textarea>
+        </form>
+      </div>
+      <main className="flex justify-center">
+        <ul className="px-3 lg:px-0 mt-12 lg:flex lg:justify-start lg:flex-wrap lg:gap-8 flex-1 lg:mx-48">
+          {notes.map((note: NoteApp, index: number) => (
+            <li
+              key={index}
+              value={note.id}
+              className={`mb-6 text-left relative card lg:w-[calc(50%-2rem)] 2xl:w-[calc(33.333333333%-2rem)] hover:scale-[1.02] duration-300`}
+            >
+              <div
+                className="relative w-full h-full bg-white/5 rounded-[16px] flex flex-col items-start p-4 cursor-pointer lg:pb-32"
+                onClick={() => editClick(note)}
+              >
+                <h3 className={`card-title lg:text-4xl`}>{note.topic}</h3>
+                <p className={`text-white/50`}>{note.text}</p>
+                <p className="text-white/50 text-xs lg:absolute lg:bottom-[12px] flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-arrow-repeat mr-1"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"
+                    />
+                  </svg>
+                  {note.date}
+                </p>
+              </div>
+              <div className="dropdown dropdown-end dropdown-bottom absolute right-0 bg-transparent">
+                <div
+                  role="button"
+                  className="btn btn-ghost bg-transparent"
+                  tabIndex={0}
                 >
-                  ลบโน๊ต
-                </li>
-              </ul>
-            </div>{" "}
-            
-          </li>
-        ))}
-      </ul></main>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-three-dots-vertical"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                  </svg>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="shadow dropdown-content z-[1] bg-base-200 w-[84px] rounded-box"
+                >
+                  <li
+                    className="btn btn-ghost btn-sm w-full rounded-box"
+                    onClick={() => deleteData(note.id)}
+                  >
+                    ลบโน๊ต
+                  </li>
+                </ul>
+              </div>{" "}
+            </li>
+          ))}
+        </ul>
+      </main>
     </>
   );
 }

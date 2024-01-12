@@ -82,15 +82,39 @@ function Todo() {
   return (
     <>
       <header className="relative flex justify-center pt-2">
-        <h1 className="text-center font-bold text-3xl lg:text-5xl bg-clip-text bg-gradient-to-r from-secondary to-accent text-transparent">Todo-list</h1>
+        <h1 className="text-center font-bold text-3xl lg:text-5xl bg-clip-text bg-gradient-to-r from-secondary to-accent text-transparent">
+          Todo-list
+        </h1>
       </header>
+      {todos.length === 0 ? (
+        <div className="absolute w-full h-full top-0 -z-10 flex flex-col items-center justify-center">
+          <div className="relative">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="96"
+              height="96"
+              fill="currentColor"
+              className="bi bi-check2-square opacity-20"
+              viewBox="0 0 16 16"
+            >
+              <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5z" />
+              <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0" />
+            </svg>
+          </div>
+          <div className="text-2xl opacity-40 mt-6 relative">
+            ไม่มีสิ่งที่ต้องทำ
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
       {isEditing ? (
         <form
           id="myform"
           onSubmit={handleEditFormSubmit}
           className={`fixed w-full h-full left-0 top-0 bg-black/40`}
         >
-          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="relative w-full h-full flex-col flex justify-center items-center">
             <input
               autoComplete="on"
               name="edit todo"
@@ -99,9 +123,10 @@ function Todo() {
               type="text"
               placeholder="edit"
               value={currentTodo.text}
-            />
-            <button type="submit">update</button>
-            <button onClick={() => setEditing(false)}>cancel</button>
+              autoFocus={true}
+            /> <br/>
+            <div className="flex gap-2 scale-95"><button type="submit" className="btn btn-success">OK</button>
+            <button className="btn btn-error" onClick={() => setEditing(false)}>cancel</button></div>
           </div>
         </form>
       ) : (
@@ -109,13 +134,13 @@ function Todo() {
       )}
       <form className="text-center" onSubmit={handleFormSubmit}>
         <input
-          className="input input-bordered input-sm my-6"
+          className="input input-bordered input-sm my-6 tracking-wide"
           type="text"
           name="todo"
-          placeholder="Create a new todo"
+          placeholder="ลิสต์สิ่งที่ต้องทำ"
           value={todo}
           onChange={handleInputChange}
-        />
+        /> <button className="btn btn-secondary btn-square btn-sm ml-2">+</button>
       </form>
       <ul className="todo-list mt-2 w-1/2 mx-auto">
         {todos.map((todo: Todo, index: number) => (
@@ -142,7 +167,7 @@ function Todo() {
             >
               {todo.text}
             </p>
-            <div className="dropdown lg:hidden">
+            <div className="dropdown">
               <div role="button" className="btn btn-ghost" tabIndex={0}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -170,18 +195,6 @@ function Todo() {
                 </li>
               </ul>
             </div>{" "}
-            <button
-              onClick={() => editClick(todo)}
-              className="btn btn-primary btn-xs ml-4 mr-2 hidden lg:block"
-            >
-              Edit
-            </button>{" "}
-            <button
-              onClick={() => deleteData(todo.id)}
-              className="delete btn btn-primary btn-xs hidden lg:block"
-            >
-              delete
-            </button>
           </li>
         ))}
       </ul>
