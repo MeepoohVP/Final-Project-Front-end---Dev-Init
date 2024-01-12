@@ -56,7 +56,7 @@ function Nav() {
               </button>
             </NavLink>
             <nav
-              className={`z-10 border-t-[1px] border-t-solid border-t-white/10 flex w-full justify-center fixed bottom-0 bg-base-300 h-auto p-6 duration-700 lg:bg-base-200 lg:bottom-auto lg:w-auto lg:h-full lg:items-center`}
+              className={`z-10 border-t-[1px] border-t-solid border-t-white/10 flex w-full justify-center fixed bottom-0 bg-base-300 h-auto p-6 duration-700 shadow-[0_0_16px_0_rgba(255,255,255,0.2)] lg:bg-base-200 lg:bottom-auto lg:w-auto lg:h-full lg:items-center`}
             >
               <ul className="relative flex items-center justify-between lg:justify-start w-full lg:flex-col gap-4">
                 <li className="text-center">
@@ -113,7 +113,6 @@ function Nav() {
                   <div className="text-white lg:hidden text-xs">Schedule</div>
                 </li>
               </ul>
-              
             </nav>
           </>
         )}

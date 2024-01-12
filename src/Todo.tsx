@@ -81,9 +81,9 @@ function Todo() {
   };
   return (
     <>
-      <main className="relative" id="myTodo">
-        <h1 className="text-center font-bold text-3xl">To-do list</h1>
-      </main>
+      <header className="relative flex justify-center pt-2">
+        <h1 className="text-center font-bold text-3xl lg:text-5xl bg-clip-text bg-gradient-to-r from-secondary to-accent text-transparent">Todo-list</h1>
+      </header>
       {isEditing ? (
         <form
           id="myform"
