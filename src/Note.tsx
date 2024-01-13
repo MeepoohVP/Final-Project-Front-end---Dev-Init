@@ -250,7 +250,7 @@ function Note() {
         </form>
       </div>
       <main className="flex justify-center">
-        <ul className="px-3 lg:px-0 mt-12 lg:flex lg:justify-start lg:flex-wrap lg:gap-8 flex-1 lg:mx-48">
+        <ul className="px-3 lg:px-0 mt-12 lg:flex lg:justify-start lg:flex-wrap lg:gap-8 flex-1 lg:mx-48 pb-16">
           {notes.map((note: NoteApp, index: number) => (
             <li
               key={index}
@@ -258,10 +258,10 @@ function Note() {
               className={`mb-6 text-left relative card lg:w-[calc(50%-2rem)] 2xl:w-[calc(33.333333333%-2rem)] hover:scale-[1.02] duration-300`}
             >
               <div
-                className="relative w-full h-full bg-white/5 rounded-[16px] flex flex-col items-start p-4 cursor-pointer lg:pb-32"
+                className="relative w-full h-full bg-white/5 rounded-[16px] flex flex-col items-start px-4 pt-3 pb-2 cursor-pointer lg:pb-32"
                 onClick={() => editClick(note)}
               >
-                <h3 className={`card-title lg:text-4xl`}>{note.topic}</h3>
+                <h3 className={`card-title lg:text-4xl text-sm`}>{note.topic}</h3>
                 <p className={`text-white/50`}>{note.text}</p>
                 <p className="text-white/50 text-xs lg:absolute lg:bottom-[12px] flex items-center">
                   <svg

@@ -142,12 +142,12 @@ function Todo() {
           onChange={handleInputChange}
         /> <button className="btn btn-secondary btn-square btn-sm ml-2">+</button>
       </form>
-      <ul className="todo-list mt-2 w-1/2 mx-auto">
+      <ul className="todo-list mt-2 lg:w-1/2 lg:mx-auto mx-12 lg:px-20">
         {todos.map((todo: Todo, index: number) => (
           <li
             key={index}
             value={todo.id}
-            className={`mb-12 flex items-center justify-center`}
+            className={`mb-12 flex items-center justify-between`}
           >
             {" "}
             <input
