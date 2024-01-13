@@ -261,13 +261,13 @@ function Note() {
                 className="relative w-full h-full bg-white/5 rounded-[16px] flex flex-col items-start px-4 pt-3 pb-2 cursor-pointer lg:pb-32"
                 onClick={() => editClick(note)}
               >
-                <h3 className={`card-title lg:text-4xl text-sm`}>{note.topic}</h3>
-                <p className={`text-white/50`}>{note.text}</p>
-                <p className="text-white/50 text-xs lg:absolute lg:bottom-[12px] flex items-center">
+                <h3 className={`card-title lg:text-4xl text-xs`}>{note.topic}</h3>
+                <p className={`text-white/50 text-[8px] my-1`}>{note.text}</p>
+                <p className="text-white/50 text-[8px] lg:absolute lg:bottom-[12px] flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
+                    width="10"
+                    height="10"
                     fill="currentColor"
                     className="bi bi-arrow-repeat mr-1"
                     viewBox="0 0 16 16"
