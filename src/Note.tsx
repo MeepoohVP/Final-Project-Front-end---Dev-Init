@@ -184,7 +184,7 @@ function Note() {
               </svg>
             </button>
             <input
-              className="input input-ghost focus:outline-none focus:border-transparent focus:bg-base-200 rounded-none my-6 lg:text-5xl"
+              className="input input-ghost focus:outline-none focus:border-transparent focus:bg-base-200 rounded-none my-6 text-3xl lg:text-5xl"
               type="text"
               name="topic"
               placeholder="Topic"
@@ -262,7 +262,7 @@ function Note() {
                 onClick={() => editClick(note)}
               >
                 <h3 className={`card-title lg:text-4xl text-xs`}>{note.topic}</h3>
-                <p className={`text-white/50 text-[8px] my-1`}>{note.text}</p>
+                <p className={`text-white/50 text-[10px] my-1`}>{note.text}</p>
                 <p className="text-white/50 text-[8px] lg:absolute lg:bottom-[12px] flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
