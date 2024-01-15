@@ -144,7 +144,7 @@ function Todo() {
         ""
       )}
       <button
-        className="btn btn-primary btn-circle fixed bottom-[84px] right-0 m-4 lg:bottom-0 z-20"
+        className="btn btn-accent btn-circle fixed bottom-[84px] right-0 m-4 lg:bottom-0 z-20"
         onClick={createClick}
       >
         <svg
@@ -160,10 +160,10 @@ function Todo() {
       </button>
       {isCreate && !isSubmit ? (
         <form
-        className={`text-center w-full h-1/3 rounded-box z-20 bg-base-100 fixed p-4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2`}
+        className={`text-center w-full h-1/3 lg:w-auto lg:py-8 lg:px-16 rounded-box z-20 bg-base-100 fixed p-4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2`}
         onSubmit={handleFormSubmit}
       >
-        <h1>ลิสต์สิ่งที่ต้องทำ</h1>
+        <h1 className="lg:text-xl">ลิสต์สิ่งที่ต้องทำ</h1>
         <button type="submit" className="absolute top-0 right-0 m-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,11 @@ function Todo() {
         </button>
         <button
           className="absolute top-0 left-0 m-2"
-          onClick={() => setIsCreate(false)}
+          onClick={() => {
+            setIsCreate(false);
+            setTodo("");
+          }
+        }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +194,7 @@ function Todo() {
         <div className="mt-8">
           <input
             autoFocus={true}
-            className="input input-bordered tracking-wide"
+            className="input input-bordered tracking-wide lg:input-lg"
             type="text"
             name="todo"
             placeholder="สิ่งที่ต้องทำ"
@@ -213,9 +217,7 @@ function Todo() {
               value={todo.id}
               type="checkbox"
               checked={todo.checked}
-              className={`checkbox checkbox-sm mr-2 ${
-                todo.checked ? "opacity-30" : ""
-              }`}
+              className={`checkbox checkbox-sm mr-2 rounded-full checkbox-accent`}
               onChange={() => handleCheckedbox(index)}
             />{" "}
             <p

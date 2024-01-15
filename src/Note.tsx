@@ -125,7 +125,7 @@ function Note() {
   return (
     <>
       <button
-        className="btn btn-primary btn-circle fixed bottom-[84px] right-0 m-4 lg:bottom-0 z-20"
+        className="btn btn-accent btn-circle fixed bottom-[84px] right-0 m-4 lg:bottom-0 z-20"
         onClick={() => {
           setShowForm("block");
         }}
