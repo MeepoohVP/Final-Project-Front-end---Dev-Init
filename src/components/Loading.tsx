@@ -17,48 +17,34 @@ function Loading() {
         >
           <div
             id="layerTop"
-            className={`absolute z-20 duration-500 ${
-              window.location.pathname === "/note"
-                ? ""
-                : window.location.pathname === "/schedule"
-                ? "animate-[layerBottom_0.7s_linear] z-[1]"
-                : "animate-[layerTop_0.7s_linear]"
-            }`}
+            className={`absolute z-20 duration-500 animate-[layerTop_0.7s_linear]`}
           >
             <svg width="120" height="120">
               <polygon
                 points="0 40,40 60,80 40,40 20"
-                className="fill-secondary stroke-black translate-x-[16%]"
+                className={`${window.location.pathname==="/todo"?"fill-secondary":"fill-primary"} stroke-black translate-x-[16%]`}
               />
             </svg>
           </div>
           <div
             id="layerMiddle"
-            className={`absolute duration-500 ${
-              window.location.pathname === "/note"
-                ? "z-20 animate-[layerTop_0.7s_linear]"
-                : "z-10"
-            }`}
-          >
-            <svg width="120" height="120">
-              <polygon
-                points="0 40,40 60,80 40,40 20"
-                className="fill-primary stroke-black translate-x-[16%]"
-              />
-            </svg>
-          </div>
-          <div
-            id="layerBottom"
-            className={`absolute mt-28 duration-500 ${
-              window.location.pathname === "/schedule"
-                ? "animate-[layerTop_0.7s_linear] z-[30]"
-                : "animate-[layerBottom_0.7s_linear]"
-            }`}
+            className={`absolute duration-500 z-10`}
           >
             <svg width="120" height="120">
               <polygon
                 points="0 40,40 60,80 40,40 20"
                 className="fill-accent stroke-black translate-x-[16%]"
+              />
+            </svg>
+          </div>
+          <div
+            id="layerBottom"
+            className={`absolute mt-28 duration-500 animate-[layerBottom_0.7s_linear]`}
+          >
+            <svg width="120" height="120">
+              <polygon
+                points="0 40,40 60,80 40,40 20"
+                className={`${window.location.pathname==="/note"?"fill-secondary":"fill-primary"} stroke-black translate-x-[16%]`}
               />
             </svg>
           </div>
