@@ -217,7 +217,8 @@ function Todo() {
               value={todo.id}
               type="checkbox"
               checked={todo.checked}
-              className={`checkbox checkbox-sm mr-2 rounded-full checkbox-accent`}
+              className={`checkbox checkbox-sm mr-2 rounded-full
+              ${todo.checked ? "checkbox-accent" : ""}`}
               onChange={() => handleCheckedbox(index)}
             />{" "}
             <p
