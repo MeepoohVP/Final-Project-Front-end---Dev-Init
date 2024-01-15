@@ -22,7 +22,8 @@ function Note() {
     date: any;
     // include other properties of the todo object
   };
-  const [showForm, setShowForm] = useState("hidden");
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEditing, setEditing] = useState<boolean>(false);
   const [currentNote, setCurrentNote] = useState<any>({});
   const [notes, setNotes] = useState(() => {
@@ -59,6 +60,10 @@ function Note() {
     setEditing(true);
     setCurrentNote({ ...note });
   };
+  const createClick = (): void => {
+    setIsCreate(true);
+    setIsSubmit(false);
+  };
   const handleUpdateNote = (id: number, updateTodo: object): void => {
     const updateItem = notes.map((note: NoteApp) => {
       return note.id === id ? updateTodo : note;
@@ -76,41 +81,40 @@ function Note() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setNote(e.target.value);
-    e.target.value = "";
   };
   const handleInputTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTopic(e.target.value);
-    e.target.value = "";
   };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setShowForm("hidden");
     if (topic !== "") {
       setNotes([
         ...notes,
         {
           id: (Math.random() * 100).toFixed(0),
           topic: topic.trim(),
-          text: note.trim(),
+          text: note.trim().length > 16 ? note.trim().slice(0,16) + "..." : note.trim(),
           date: getDate() + "/" + getMonth() + "/" + getYear(),
         },
       ]);
       setNote("");
       setTopic("");
+      setIsSubmit(true);
     }
     if (note !== "" && topic === "") {
       setNotes([
         ...notes,
         {
           id: (Math.random() * 100).toFixed(0),
-          topic: note.trim(),
-          text: note.trim(),
+          topic: note.trim().length > 16 ? note.trim().slice(0,16) + "..." : note.trim(),
+          text: note.trim().length > 16 ? note.trim().slice(0,16) + "..." : note.trim(),
           date: getDate() + "/" + getMonth() + "/" + getYear(),
         },
       ]);
       setNote("");
       setTopic("");
+      setIsSubmit(true);
     } else {
       setNote("");
       setTopic("");
@@ -126,9 +130,7 @@ function Note() {
     <>
       <button
         className="btn btn-accent btn-circle fixed bottom-[84px] right-0 m-4 lg:bottom-0 z-20"
-        onClick={() => {
-          setShowForm("block");
-        }}
+        onClick={createClick}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +171,7 @@ function Note() {
         <div className={`fixed w-full h-full z-20 bg-base-300/70 top-0`}>
           <form
             onSubmit={handleEditFormSubmit}
-            className={`bg-base-300 p-3 z-20 w-full h-full lg:h-auto lg:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+            className={`bg-base-100 p-3 w-full h-full lg:h-auto lg:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:rounded-xl lg:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}
           >
             <button className="self-end" type="submit">
               <svg
@@ -184,7 +186,7 @@ function Note() {
               </svg>
             </button>
             <input
-              className="input input-ghost focus:outline-none focus:border-transparent focus:bg-base-200 rounded-none my-6 text-3xl lg:text-5xl"
+              className="input focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl"
               type="text"
               name="topic"
               placeholder="Topic"
@@ -194,7 +196,7 @@ function Note() {
             <textarea
               name="edit note"
               onChange={handleEditInputChange}
-              className="textarea textarea-ghost resize-none h-full focus:bg-base-200 focus:border-transparent focus:outline-none lg:text-xl"
+              className="textarea textarea-ghost resize-none h-full"
               placeholder="edit"
               value={currentNote.text}
               rows={12}
@@ -211,27 +213,48 @@ function Note() {
       ) : (
         ""
       )}
-      <div
-        className={`fixed top-0 w-full h-full z-20 ${showForm} bg-base-300/70`}
-      >
-        <form
+        {isCreate && !isSubmit ? (
+           <div
+           className={`fixed top-0 w-full h-full z-20 bg-base-300/70`}
+         >
+          <form
           className={`bg-base-100 p-3 w-full h-full lg:h-auto lg:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:rounded-xl lg:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}
           onSubmit={handleFormSubmit}
         >
-          <button className="self-end">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              fill="currentColor"
-              className="bi bi-check"
-              viewBox="0 0 16 16"
-            >
-              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-            </svg>
-          </button>
+          <div className="self-start flex justify-between w-full">
+          <button className="" 
+           onClick={() => {
+            setIsCreate(false);
+            setNote("");
+            setTopic("");
+          }
+        }
+           >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            className="bi bi-x w-8 h-8"
+            viewBox="0 0 16 16"
+          >
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+          </svg>
+        </button>
+
+        <button className="" type="submit">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="currentColor"
+            className="bi bi-check"
+            viewBox="0 0 16 16"
+          >
+            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+          </svg>
+        </button>
+          </div>
           <input
-            className="input focus:outline-none focus:border-transparent rounded-none my-6 text-3xl"
+            className="input focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl"
             type="text"
             name="topic"
             placeholder="Topic"
@@ -248,7 +271,9 @@ function Note() {
             rows={12}
           ></textarea>
         </form>
-      </div>
+        </div>
+        ) : ""}
+        
       <main className="flex justify-center">
         <ul className="px-3 lg:px-0 mt-12 lg:flex lg:justify-start lg:flex-wrap lg:gap-8 flex-1 lg:mx-48 pb-16">
           {notes.map((note: NoteApp, index: number) => (
@@ -261,7 +286,7 @@ function Note() {
                 className="relative w-full h-full bg-white/5 rounded-[16px] flex flex-col items-start px-4 pt-3 pb-2 cursor-pointer lg:pb-32"
                 onClick={() => editClick(note)}
               >
-                <h3 className={`card-title lg:text-4xl text-xs`}>{note.topic}</h3>
+                <h3 className={`card-title lg:text-4xl text-xs break-all`}>{note.topic}</h3>
                 <p className={`text-white/50 text-[10px] lg:text-lg my-1`}>{note.text}</p>
                 <p className="text-white/50 text-[8px] lg:text-xs lg:absolute lg:bottom-[12px] flex items-center">
                   <svg

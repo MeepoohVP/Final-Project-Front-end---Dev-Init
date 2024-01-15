@@ -54,7 +54,6 @@ function Todo() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value);
-    e.target.focus();
   };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -204,7 +203,7 @@ function Todo() {
         </div>
       </form>
       ) : ""}
-      <ul className="todo-list mt-2 lg:w-1/2 lg:mx-auto mx-12 lg:px-20">
+      <ul className="todo-list mt-12 lg:w-1/2 lg:mx-auto mx-12 lg:px-20">
         {todos.map((todo: Todo, index: number) => (
           <li
             key={index}
@@ -217,12 +216,12 @@ function Todo() {
               value={todo.id}
               type="checkbox"
               checked={todo.checked}
-              className={`checkbox checkbox-sm mr-2 rounded-full
+              className={`checkbox checkbox-sm mr-2 rounded-full opacity-75
               ${todo.checked ? "checkbox-accent" : ""}`}
               onChange={() => handleCheckedbox(index)}
             />{" "}
             <p
-              className={`flex-1 ${
+              className={`flex-1 break-all ${
                 todo.checked ? "opacity-30 line-through" : ""
               }`}
             >
@@ -243,13 +242,13 @@ function Todo() {
               </div>
               <ul
                 tabIndex={0}
-                className="p-2 shadow menu dropdown-content z-[1] bg-base-300 w-auto rounded-none"
+                className="p-2 shadow menu dropdown-content z-[1] bg-neutral w-auto rounded-box"
               >
-                <li className="btn btn-ghost" onClick={() => editClick(todo)}>
+                <li className="btn btn-ghost btn-sm" onClick={() => editClick(todo)}>
                   edit
                 </li>
                 <li
-                  className="btn btn-ghost"
+                  className="btn btn-ghost btn-sm"
                   onClick={() => deleteData(todo.id)}
                 >
                   delete
