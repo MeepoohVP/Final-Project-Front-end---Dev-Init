@@ -94,7 +94,7 @@ function Note() {
         {
           id: (Math.random() * 100).toFixed(0),
           topic: topic.trim(),
-          text: note.trim().length > 16 ? note.trim().slice(0,16) + "..." : note.trim(),
+          text: note.trim(),
           date: getDate() + "/" + getMonth() + "/" + getYear(),
         },
       ]);
@@ -107,8 +107,8 @@ function Note() {
         ...notes,
         {
           id: (Math.random() * 100).toFixed(0),
-          topic: note.trim().length > 16 ? note.trim().slice(0,16) + "..." : note.trim(),
-          text: note.trim().length > 16 ? note.trim().slice(0,16) + "..." : note.trim(),
+          topic: note.trim(),
+          text: note.trim(),
           date: getDate() + "/" + getMonth() + "/" + getYear(),
         },
       ]);
@@ -286,8 +286,8 @@ function Note() {
                 className="relative w-full h-full bg-white/5 rounded-[16px] flex flex-col items-start px-4 pt-3 pb-2 cursor-pointer lg:pb-32"
                 onClick={() => editClick(note)}
               >
-                <h3 className={`card-title lg:text-4xl text-xs break-all`}>{note.topic}</h3>
-                <p className={`text-white/50 text-[10px] lg:text-lg my-1`}>{note.text}</p>
+                <h3 className={`card-title lg:text-4xl text-xs break-all`}>{note.topic.length > 16 ? note.topic.slice(0,16) + "..." : note.topic}</h3>
+                <p className={`text-white/50 text-[10px] lg:text-lg my-1`}>{note.text.length > 16 ? note.text.slice(0,16) + "..." : note.text}</p>
                 <p className="text-white/50 text-[8px] lg:text-xs lg:absolute lg:bottom-[12px] flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
