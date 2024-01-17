@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 function Todo() {
-  type Todo = {
+  type TodoApp = {
     id: number;
     text: string;
     checked: boolean;
-    // include other properties of the todo object
   };
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const [isEditing, setEditing] = useState<boolean>(false);
@@ -31,7 +30,7 @@ function Todo() {
     });
     console.log("Current todo: ", currentTodo);
   };
-  const editClick = (todo: object): void => {
+  const editClick = (todo: TodoApp): void => {
     setEditing(true);
     setCurrentTodo({ ...todo });
   };
@@ -40,7 +39,7 @@ function Todo() {
     setIsSubmit(false);
   };
   const handleUpdateTodo = (id: number, updateTodo: object): void => {
-    const updateItem = todos.map((todo: Todo) => {
+    const updateItem = todos.map((todo: TodoApp) => {
       return todo.id === id ? updateTodo : todo;
     });
     setEditing(false);
@@ -74,7 +73,7 @@ function Todo() {
     setIsSubmit(true);
   };
   const deleteData = (id: number) => {
-    const removeItem = todos.filter((todo: Todo) => {
+    const removeItem = todos.filter((todo: TodoApp) => {
       return todo.id !== id;
     });
     setTodos(removeItem);
@@ -159,52 +158,53 @@ function Todo() {
       </button>
       {isCreate && !isSubmit ? (
         <form
-        className={`text-center w-full h-1/3 lg:w-auto lg:py-8 lg:px-16 rounded-box z-20 bg-base-100 fixed p-4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2`}
-        onSubmit={handleFormSubmit}
-      >
-        <h1 className="lg:text-xl">ลิสต์สิ่งที่ต้องทำ</h1>
-        <button type="submit" className="absolute top-0 right-0 m-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            className="bi bi-check w-8 h-8"
-            viewBox="0 0 16 16"
-          >
-            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-          </svg>
-        </button>
-        <button
-          className="absolute top-0 left-0 m-2"
-          onClick={() => {
-            setIsCreate(false);
-            setTodo("");
-          }
-        }
+          className={`text-center w-full h-1/3 lg:w-auto lg:py-8 lg:px-16 rounded-box z-20 bg-base-100 fixed p-4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2`}
+          onSubmit={handleFormSubmit}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            className="bi bi-x w-8 h-8"
-            viewBox="0 0 16 16"
+          <h1 className="lg:text-xl">ลิสต์สิ่งที่ต้องทำ</h1>
+          <button type="submit" className="absolute top-0 right-0 m-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              className="bi bi-check w-8 h-8"
+              viewBox="0 0 16 16"
+            >
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+            </svg>
+          </button>
+          <button
+            className="absolute top-0 left-0 m-2"
+            onClick={() => {
+              setIsCreate(false);
+              setTodo("");
+            }}
           >
-            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-          </svg>
-        </button>
-        <div className="mt-8">
-          <input
-            autoFocus={true}
-            className="input input-bordered tracking-wide lg:input-lg"
-            type="text"
-            name="todo"
-            placeholder="สิ่งที่ต้องทำ"
-            value={todo}
-            onChange={handleInputChange}
-          />
-        </div>
-      </form>
-      ) : ""}
-      <ul className="todo-list mt-12 lg:w-1/2 lg:mx-auto mx-12 lg:px-20">
-        {todos.map((todo: Todo, index: number) => (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              className="bi bi-x w-8 h-8"
+              viewBox="0 0 16 16"
+            >
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+            </svg>
+          </button>
+          <div className="mt-8">
+            <input
+              autoFocus={true}
+              className="input input-bordered tracking-wide lg:input-lg"
+              type="text"
+              name="todo"
+              placeholder="สิ่งที่ต้องทำ"
+              value={todo}
+              onChange={handleInputChange}
+            />
+          </div>
+        </form>
+      ) : (
+        ""
+      )}
+      <ul className="todo-list mt-12 lg:w-1/2 lg:mx-auto mx-12 md:mx-32 lg:px-20">
+        {todos.map((todo: TodoApp, index: number) => (
           <li
             key={index}
             value={todo.id}
@@ -221,7 +221,7 @@ function Todo() {
               onChange={() => handleCheckedbox(index)}
             />{" "}
             <p
-              className={`flex-1 break-all ${
+              className={`flex-1 break-all md:text-xl lg:text-lg ${
                 todo.checked ? "opacity-30 line-through" : ""
               }`}
             >
@@ -244,7 +244,10 @@ function Todo() {
                 tabIndex={0}
                 className="p-2 shadow menu dropdown-content z-[1] bg-neutral w-auto rounded-box"
               >
-                <li className="btn btn-ghost btn-sm" onClick={() => editClick(todo)}>
+                <li
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => editClick(todo)}
+                >
                   edit
                 </li>
                 <li

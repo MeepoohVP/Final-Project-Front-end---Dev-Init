@@ -5,7 +5,6 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import App from "../App";
 import Todo from "../Todo";
 import Note from "../Note";
 function Nav() {
@@ -66,7 +65,6 @@ function Nav() {
           </>
         )}
         <Routes>
-          <Route path="/" element={<App />} />
           <Route path="/todo" element={<Todo />} />
           <Route path="/note" element={<Note />} />
         </Routes>
