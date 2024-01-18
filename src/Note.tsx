@@ -15,7 +15,7 @@ function Note() {
   const getYear = (): string => {
     return new Date().getFullYear().toString();
   };
-  type NoteApp = {
+  interface NoteApp {
     id: number;
     text: string;
     topic: string;
@@ -128,7 +128,7 @@ function Note() {
   };
   return (
     <>
-      <header className="relative flex ml-4 md:justify-center pt-2">
+      <header className="relative flex ml-6 md:justify-center pt-2">
         <h1 className="font-bold text-5xl bg-clip-text bg-gradient-to-r from-primary to-accent text-transparent before:content-['Note']"></h1>
       </header>
       <button

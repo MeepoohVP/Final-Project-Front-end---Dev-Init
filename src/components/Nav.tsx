@@ -26,7 +26,8 @@ function Nav() {
               <ul className="relative flex items-center justify-around lg:justify-start w-full lg:flex-col gap-4">
                 <li className="text-center">
                   <NavLink onClick={Refresh}
-                    className={`btn btn-secondary btn-square btn-sm glass bg-gradient-to-br from-secondary from-50% to-accent hover:bg-gradient-to-tl duration-700 hover:scale-105`}
+                    className={`btn btn-secondary btn-square btn-sm glass bg-gradient-to-br from-secondary from-50% to-accent hover:bg-gradient-to-tl duration-700 hover:scale-105
+                               ${window.location.pathname==="/todo" ? "btn-disabled opacity-40" : ""}`}
                     to="/todo"
                   >
                     <svg
@@ -45,7 +46,8 @@ function Nav() {
                 </li>
                 <li className="text-center">
                   <NavLink onClick={Refresh}
-                    className="btn btn-primary btn-square btn-sm glass bg-gradient-to-r from-primary from-50% duration-700 hover:bg-gradient-to-tl to-accent hover:scale-105"
+                    className={`btn btn-primary btn-square btn-sm glass bg-gradient-to-r from-primary from-50% duration-700 hover:bg-gradient-to-tl to-accent hover:scale-105
+                              ${window.location.pathname==="/note" ? "btn-disabled opacity-40" : ""}`}
                     to="/note"
                   >
                     <svg
