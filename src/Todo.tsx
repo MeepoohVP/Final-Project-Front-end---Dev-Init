@@ -4,7 +4,7 @@ function Todo() {
     id: number;
     text: string;
     checked: boolean;
-  };
+  }
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const [isEditing, setEditing] = useState<boolean>(false);
   const [isCreate, setIsCreate] = useState<boolean>(false);
@@ -87,7 +87,7 @@ function Todo() {
   return (
     <>
       <header className="relative flex ml-6 md:justify-center md:ml-0 pt-2">
-        <h1 className="font-bold text-5xl bg-clip-text bg-gradient-to-r from-secondary to-accent text-transparent before:content-['To-Do_list']"></h1>
+        <h1 className="font-bold text-4xl md:text-5xl bg-clip-text bg-gradient-to-r from-secondary to-accent text-transparent before:content-['To-Do_list']"></h1>
       </header>
       {todos.length === 0 ? (
         <div className="absolute w-full h-full top-0 -z-10 flex flex-col items-center justify-center">
@@ -115,6 +115,7 @@ function Todo() {
           className={`fixed w-full h-full left-0 top-0 bg-black/40`}
         >
           <div className="relative w-full h-full flex-col flex justify-center items-center">
+          <h1 className="lg:text-xl my-4">แก้ไขสิ่งที่ต้องทำ</h1>
             <input
               name="edit todo"
               onChange={handleEditInputChange}
@@ -144,6 +145,7 @@ function Todo() {
       <button
         className="btn btn-accent btn-circle fixed bottom-[84px] right-0 m-4 lg:bottom-0 z-20"
         onClick={createClick}
+        id="create"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +163,7 @@ function Todo() {
           className={`text-center w-full h-1/3 lg:w-auto lg:py-8 lg:px-16 rounded-box z-20 bg-base-100 fixed p-4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2`}
           onSubmit={handleFormSubmit}
         >
-          <h1 className="lg:text-xl">ลิสต์สิ่งที่ต้องทำ</h1>
+          <h1 className="lg:text-xl" id="test">ลิสต์สิ่งที่ต้องทำ</h1>
           <button type="submit" className="absolute top-0 right-0 m-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -203,9 +205,10 @@ function Todo() {
       ) : (
         ""
       )}
-      <ul className="todo-list mt-12 lg:w-1/2 lg:mx-auto mx-12 md:mx-32 lg:px-20">
+      <ul id="todo-area" className="todo-list mt-12 lg:w-1/2 lg:mx-auto mx-12 md:mx-32 lg:px-20">
         {todos.map((todo: TodoApp, index: number) => (
           <li
+            id={todo.id.toString()}
             key={index}
             value={todo.id}
             className={`mb-12 flex items-center justify-between`}

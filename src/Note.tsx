@@ -15,13 +15,7 @@ function Note() {
   const getYear = (): string => {
     return new Date().getFullYear().toString();
   };
-  interface NoteApp {
-    id: number;
-    text: string;
-    topic: string;
-    date: any;
-    // include other properties of the todo object
-  };
+  interface NoteApp {id: number;text: string;topic: string;date: any;}
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEditing, setEditing] = useState<boolean>(false);
@@ -129,7 +123,7 @@ function Note() {
   return (
     <>
       <header className="relative flex ml-6 md:justify-center pt-2">
-        <h1 className="font-bold text-5xl bg-clip-text bg-gradient-to-r from-primary to-accent text-transparent before:content-['Note']"></h1>
+        <h1 className="font-bold text-4xl md:text-5xl bg-clip-text bg-gradient-to-r from-primary to-accent text-transparent before:content-['Note']"></h1>
       </header>
       <button
         className="btn btn-accent btn-circle fixed bottom-[84px] right-0 m-4 lg:bottom-0 z-20"
@@ -219,7 +213,7 @@ function Note() {
           >
             <div className="self-start flex justify-between w-full">
               <button
-                type = "reset"
+                type="reset"
                 className=""
                 onClick={() => {
                   setIsCreate(false);
