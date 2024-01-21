@@ -87,7 +87,7 @@ function Todo() {
   return (
     <>
       <header className="relative flex ml-6 md:justify-center md:ml-0 pt-2">
-        <h1 className="font-bold text-3xl md:text-5xl bg-clip-text bg-gradient-to-r from-secondary to-accent text-transparent before:content-['To-Do_list']"></h1>
+        <h1 className="font-bold text-4xl md:text-5xl bg-clip-text bg-gradient-to-r from-secondary to-accent text-transparent before:content-['To-Do_list']"></h1>
       </header>
       {todos.length === 0 ? (
         <div className="absolute w-full h-full top-0 -z-10 flex flex-col items-center justify-center">
