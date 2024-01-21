@@ -93,9 +93,9 @@ function Todo() {
       <header className="relative flex ml-6 md:justify-center md:ml-0 pt-2">
         <h1 className="font-bold text-4xl md:text-5xl bg-clip-text bg-gradient-to-r from-secondary to-accent text-transparent before:content-['To-Do_list']"></h1>
       </header>
-      <div className="fixed top-0 right-0 m-3">
+      <div className="fixed top-0 right-0 m-3 w-1/3 md:w-auto">
         <input
-          className="input input-sm"
+          className="input input-sm 2xl:input-md"
           type="text"
           placeholder="ค้นหาสิ่งที่ต้องทำ"
           value={searchQuery}
