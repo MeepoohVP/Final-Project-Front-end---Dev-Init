@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
 function Todo() {
+  useEffect(() => {
+    document.title = "To-Do list";
+    let link:any = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+    link.href = 'todo.svg';
+  }, []);
   interface TodoApp {
     id: number;
     text: string;

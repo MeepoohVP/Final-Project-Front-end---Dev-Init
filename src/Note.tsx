@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react";
 function Note() {
+  useEffect(() => {
+    document.title = "Note";
+    let link:any = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+    link.href = 'note.svg';
+  }, []);
   const getDate = (): string => {
     if (new Date().getDate().toString().length === 1) {
       return "0" + new Date().getDate().toString();
