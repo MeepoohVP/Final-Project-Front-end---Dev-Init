@@ -311,7 +311,7 @@ function Note() {
                     onClick={() => editClick(note)}
                   >
                     <h3
-                      className={`card-title lg:text-4xl text-xs md:text-lg break-all`}
+                      className={`card-title lg:text-4xl text-sm md:text-lg break-all`}
                     >
                       {note.topic.length > 16
                         ? note.topic.slice(0, 16) + "..."
