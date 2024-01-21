@@ -136,9 +136,9 @@ function Note() {
       <header className="relative flex ml-6 md:justify-center pt-2">
         <h1 className="font-bold text-4xl md:text-5xl bg-clip-text bg-gradient-to-r from-primary to-accent text-transparent before:content-['Note']"></h1>
       </header>
-      <div className="fixed top-0 right-0 m-3 w-[40%] md:w-auto">
+      <div className="fixed top-0 right-0 m-3 w-[40%] md:w-auto z-20">
         <input
-          className="input input-sm w-full 2xl:input-md"
+          className="input input-sm w-full 2xl:input-md bg-base-100"
           type="text"
           placeholder="ค้นหาโน้ต"
           value={searchQuery}
