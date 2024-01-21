@@ -84,11 +84,24 @@ function Todo() {
     setTodos(newTodos);
     console.log(index);
   };
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const filteredTodos = todos.filter((todo: TodoApp) =>
+    todo.text.toLowerCase().includes(searchQuery.trim().toLowerCase())
+  );
   return (
     <>
       <header className="relative flex ml-6 md:justify-center md:ml-0 pt-2">
         <h1 className="font-bold text-4xl md:text-5xl bg-clip-text bg-gradient-to-r from-secondary to-accent text-transparent before:content-['To-Do_list']"></h1>
       </header>
+      <div className="fixed top-0 right-0 m-3">
+        <input
+          className="input input-sm"
+          type="text"
+          placeholder="ค้นหาสิ่งที่ต้องทำ"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
       {todos.length === 0 ? (
         <div className="absolute w-full h-full top-0 -z-10 flex flex-col items-center justify-center">
           <div className="relative">
@@ -115,7 +128,7 @@ function Todo() {
           className={`fixed w-full h-full left-0 top-0 bg-black/40`}
         >
           <div className="relative w-full h-full flex-col flex justify-center items-center">
-          <h1 className="lg:text-xl my-4">แก้ไขสิ่งที่ต้องทำ</h1>
+            <h1 className="lg:text-xl my-4">แก้ไขสิ่งที่ต้องทำ</h1>
             <input
               name="edit todo"
               onChange={handleEditInputChange}
@@ -127,7 +140,11 @@ function Todo() {
             />{" "}
             <br />
             <div className="flex gap-2 scale-95">
-              <button type="submit" className="btn btn-success">
+              <button
+                type="submit"
+                className="btn btn-success"
+                data-testid="edit-confirm"
+              >
                 OK
               </button>
               <button
@@ -163,8 +180,12 @@ function Todo() {
           className={`text-center w-full h-1/3 lg:w-auto lg:py-8 lg:px-16 rounded-box z-20 bg-base-100 fixed p-4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2`}
           onSubmit={handleFormSubmit}
         >
-          <h1 className="lg:text-xl" id="test">ลิสต์สิ่งที่ต้องทำ</h1>
-          <button type="submit" className="absolute top-0 right-0 m-2">
+          <h1 className="lg:text-xl">ลิสต์สิ่งที่ต้องทำ</h1>
+          <button
+            type="submit"
+            data-testid="submit-create"
+            className="absolute top-0 right-0 m-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -205,64 +226,125 @@ function Todo() {
       ) : (
         ""
       )}
-      <ul id="todo-area" className="todo-list mt-12 lg:w-1/2 lg:mx-auto mx-12 md:mx-32 lg:px-20">
-        {todos.map((todo: TodoApp, index: number) => (
-          <li
-            id={todo.id.toString()}
-            key={index}
-            value={todo.id}
-            className={`mb-12 flex items-center justify-between`}
-          >
-            {" "}
-            <input
-              key={index}
-              value={todo.id}
-              type="checkbox"
-              checked={todo.checked}
-              className={`checkbox checkbox-sm mr-2 rounded-full opacity-75
-              ${todo.checked ? "checkbox-accent" : ""}`}
-              onChange={() => handleCheckedbox(index)}
-            />{" "}
-            <p
-              className={`flex-1 break-all md:text-xl lg:text-lg ${
-                todo.checked ? "opacity-30 line-through" : ""
-              }`}
-            >
-              {todo.text}
-            </p>
-            <div className="dropdown">
-              <div role="button" className="btn btn-ghost" tabIndex={0}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-three-dots-vertical"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                </svg>
-              </div>
-              <ul
-                tabIndex={0}
-                className="p-2 shadow menu dropdown-content z-[1] bg-neutral w-auto rounded-box"
+      <ul
+        data-testid="todo-area"
+        className="todo-list mt-12 lg:w-1/2 lg:mx-auto mx-12 md:mx-32 lg:px-20"
+      >
+        {searchQuery.trim().length === 0
+          ? todos.map((todo: TodoApp, index: number) => (
+              <li
+                data-testid={todo.id.toString()}
+                key={index}
+                value={todo.id}
+                className={`mb-12 flex items-center justify-between`}
               >
-                <li
-                  className="btn btn-ghost btn-sm"
-                  onClick={() => editClick(todo)}
+                {" "}
+                <input
+                  key={index}
+                  value={todo.id}
+                  type="checkbox"
+                  checked={todo.checked}
+                  className={`checkbox checkbox-sm mr-2 rounded-full opacity-75
+            ${todo.checked ? "checkbox-accent" : ""}`}
+                  onChange={() => handleCheckedbox(index)}
+                />{" "}
+                <p
+                  className={`flex-1 break-all md:text-xl lg:text-lg ${
+                    todo.checked ? "opacity-30 line-through" : ""
+                  }`}
                 >
-                  edit
-                </li>
-                <li
-                  className="btn btn-ghost btn-sm"
-                  onClick={() => deleteData(todo.id)}
+                  {todo.text}
+                </p>
+                <div className="dropdown">
+                  <div role="button" className="btn btn-ghost" tabIndex={0}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-three-dots-vertical"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                    </svg>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="p-2 shadow menu dropdown-content z-[1] bg-neutral w-auto rounded-box"
+                  >
+                    <li
+                      className="btn btn-ghost btn-sm"
+                      onClick={() => editClick(todo)}
+                    >
+                      edit
+                    </li>
+                    <li
+                      className="btn btn-ghost btn-sm"
+                      onClick={() => deleteData(todo.id)}
+                    >
+                      delete
+                    </li>
+                  </ul>
+                </div>{" "}
+              </li>
+            ))
+          : filteredTodos.map((todo: TodoApp, index: number) => (
+              <li
+                data-testid={todo.id.toString()}
+                key={index}
+                value={todo.id}
+                className={`mb-12 flex items-center justify-between`}
+              >
+                {" "}
+                <input
+                  key={index}
+                  value={todo.id}
+                  type="checkbox"
+                  checked={todo.checked}
+                  className={`checkbox checkbox-sm mr-2 rounded-full opacity-75
+            ${todo.checked ? "checkbox-accent" : ""}`}
+                  onChange={() => handleCheckedbox(index)}
+                />{" "}
+                <p
+                  className={`flex-1 break-all md:text-xl lg:text-lg ${
+                    todo.checked ? "opacity-30 line-through" : ""
+                  }`}
                 >
-                  delete
-                </li>
-              </ul>
-            </div>{" "}
-          </li>
-        ))}
+                  {todo.text}
+                </p>
+                <div className="dropdown">
+                  <div role="button" className="btn btn-ghost" tabIndex={0}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-three-dots-vertical"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                    </svg>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="p-2 shadow menu dropdown-content z-[1] bg-neutral w-auto rounded-box"
+                  >
+                    <li
+                      className="btn btn-ghost btn-sm"
+                      onClick={() => editClick(todo)}
+                    >
+                      edit
+                    </li>
+                    <li
+                      className="btn btn-ghost btn-sm"
+                      onClick={() => deleteData(todo.id)}
+                    >
+                      delete
+                    </li>
+                  </ul>
+                </div>{" "}
+              </li>
+            ))}
       </ul>
     </>
   );

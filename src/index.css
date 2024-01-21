@@ -11,3 +11,6 @@ body{
 body, #root{
     @apply bg-base-300;
 }
+textarea::-webkit-scrollbar {
+    display: none;
+  }
