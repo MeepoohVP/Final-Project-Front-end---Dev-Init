@@ -324,7 +324,7 @@ function Note() {
                         ? note.text.slice(0, 16) + "..."
                         : note.text}
                     </p>
-                    <p className="text-white/50 text-[8px] lg:text-xs md:text-sm lg:absolute lg:bottom-[12px] flex items-center">
+                    <p className="text-white/60 text-[8px] lg:text-xs md:text-sm lg:absolute lg:bottom-[12px] flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
