@@ -42,7 +42,7 @@ function Nav() {
                       />
                     </svg>
                   </NavLink>
-                  <div className="text-white lg:hidden text-xs mt-1">Todo-list</div>
+                  <div className="text-white lg:hidden text-xs mt-1">To-Do list</div>
                 </li>
                 <li className="text-center">
                   <NavLink onClick={Refresh}
