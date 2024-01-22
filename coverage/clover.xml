@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1705933386953" clover="3.2.0">
-  <project timestamp="1705933386953" name="All files">
+<coverage generated="1705938729946" clover="3.2.0">
+  <project timestamp="1705938729946" name="All files">
     <metrics statements="460" coveredstatements="125" conditionals="12" coveredconditionals="7" methods="17" coveredmethods="1" elements="489" coveredelements="133" complexity="0" loc="460" ncloc="460" packages="1" files="1" classes="1"/>
     <file name="Note.tsx" path="D:\DevInitProject\final-project\management-app\src\Note.tsx">
       <metrics statements="460" coveredstatements="125" conditionals="12" coveredconditionals="7" methods="17" coveredmethods="1"/>

@@ -193,7 +193,7 @@ function Note() {
         <div className={`fixed w-full h-full z-20 bg-base-300/70 top-0`}>
           <form
             onSubmit={handleEditFormSubmit}
-            className={`bg-base-100 p-3 w-full h-full sm:h-auto sm:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:rounded-xl lg:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}
+            className={`bg-base-100 p-3 w-full h-full sm:h-auto sm:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:rounded-xl sm:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}
           >
             <div className="self-start flex justify-between w-full">
               <button onClick={() => setEditing(false)}>
@@ -221,10 +221,10 @@ function Note() {
             </div>
             <input
               data-testid="edit"
-              className="input font-semibold focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl"
+              className="input font-semibold focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl sm:text-4xl lg:text-5xl lg:input-lg lg:px-0"
               type="text"
               name="topic"
-              placeholder="Topic"
+              placeholder="Title"
               value={currentNote.topic}
               onChange={handleEditTopicChange}
             />
@@ -244,7 +244,7 @@ function Note() {
       {isCreate && !isSubmit ? (
         <div className={`fixed top-0 w-full h-full z-20 bg-base-300/70`}>
           <form
-            className={`bg-base-100 p-3 w-full h-full sm:h-auto sm:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:rounded-xl lg:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}
+            className={`bg-base-100 p-3 w-full h-full sm:h-auto sm:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:rounded-xl sm:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}
             onSubmit={handleFormSubmit}
           >
             <div className="self-start flex justify-between w-full">
@@ -282,10 +282,10 @@ function Note() {
             </div>
             <input
               data-testid="create"
-              className="input font-semibold focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl"
+              className="input font-semibold focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl sm:text-4xl lg:text-5xl lg:input-lg lg:px-0"
               type="text"
               name="topic"
-              placeholder="Topic"
+              placeholder="Title"
               value={topic}
               onChange={handleInputTopicChange}
               autoFocus={true}

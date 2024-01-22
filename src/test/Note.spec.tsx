@@ -32,10 +32,10 @@ describe('User Interaction', () => {
   })
   it("click create and edit"), () =>{
     const { getByPlaceholderText } = render(<Note />)
-    const edit = getByPlaceholderText("Topic")
-    expect(getByPlaceholderText('Topic')).not.toBeInTheDocument()
+    const edit = getByPlaceholderText("Title")
+    expect(getByPlaceholderText('Title')).not.toBeInTheDocument()
     fireEvent.click(edit)
-    expect(getByPlaceholderText('Topic')).toBeInTheDocument()
+    expect(getByPlaceholderText('Title')).toBeInTheDocument()
   }
   }) 
 describe('responsive design',() => {
@@ -59,7 +59,7 @@ describe('Specific Functional Testing', () => {
     fireEvent.click(getByTestId("submit-create"))
     expect(getByText("new note")).toBeInTheDocument()
   }
-  it("Submit edit"), () => {
+  it("Submit edit"), () => { 
     const {getByTestId, getByText} = render(<Note/>)
     fireEvent.change(getByTestId("create"), {target: { value: "new note" }})
     fireEvent.click(getByTestId("submit-create"))

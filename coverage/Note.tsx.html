@@ -1178,7 +1178,7 @@ function Note() {
 <span class="cstat-no" title="statement not covered" >        &lt;div className={`fixed w-full h-full z-20 bg-base-300/70 top-0`}&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;form</span>
 <span class="cstat-no" title="statement not covered" >            onSubmit={handleEditFormSubmit}</span>
-<span class="cstat-no" title="statement not covered" >            className={`bg-base-100 p-3 w-full h-full sm:h-auto sm:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:rounded-xl lg:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}</span>
+<span class="cstat-no" title="statement not covered" >            className={`bg-base-100 p-3 w-full h-full sm:h-auto sm:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:rounded-xl sm:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}</span>
 <span class="cstat-no" title="statement not covered" >          &gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;div className="self-start flex justify-between w-full"&gt;</span>
 <span class="cstat-no" title="statement not covered" >              &lt;button onClick={<span class="fstat-no" title="function not covered" >() =&gt; setEditing(false)}&gt;</span></span>
@@ -1206,10 +1206,10 @@ function Note() {
 <span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;input</span>
 <span class="cstat-no" title="statement not covered" >              data-testid="edit"</span>
-<span class="cstat-no" title="statement not covered" >              className="input font-semibold focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl"</span>
+<span class="cstat-no" title="statement not covered" >              className="input font-semibold focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl sm:text-4xl lg:text-5xl lg:input-lg lg:px-0"</span>
 <span class="cstat-no" title="statement not covered" >              type="text"</span>
 <span class="cstat-no" title="statement not covered" >              name="topic"</span>
-<span class="cstat-no" title="statement not covered" >              placeholder="Topic"</span>
+<span class="cstat-no" title="statement not covered" >              placeholder="Title"</span>
 <span class="cstat-no" title="statement not covered" >              value={currentNote.topic}</span>
 <span class="cstat-no" title="statement not covered" >              onChange={handleEditTopicChange}</span>
 <span class="cstat-no" title="statement not covered" >            /&gt;</span>
@@ -1229,7 +1229,7 @@ function Note() {
       {<span class="branch-0 cbranch-no" title="branch not covered" >isCreate &amp;&amp; !<span class="branch-0 cbranch-no" title="branch not covered" >isSubmit ? (</span></span>
 <span class="cstat-no" title="statement not covered" >        &lt;div className={`fixed top-0 w-full h-full z-20 bg-base-300/70`}&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;form</span>
-<span class="cstat-no" title="statement not covered" >            className={`bg-base-100 p-3 w-full h-full sm:h-auto sm:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:rounded-xl lg:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}</span>
+<span class="cstat-no" title="statement not covered" >            className={`bg-base-100 p-3 w-full h-full sm:h-auto sm:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:rounded-xl sm:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}</span>
 <span class="cstat-no" title="statement not covered" >            onSubmit={handleFormSubmit}</span>
 <span class="cstat-no" title="statement not covered" >          &gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;div className="self-start flex justify-between w-full"&gt;</span>
@@ -1267,10 +1267,10 @@ function Note() {
 <span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;input</span>
 <span class="cstat-no" title="statement not covered" >              data-testid="create"</span>
-<span class="cstat-no" title="statement not covered" >              className="input font-semibold focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl"</span>
+<span class="cstat-no" title="statement not covered" >              className="input font-semibold focus:outline-none focus:border-transparent focus:border-b-[1px] p-1 duration-300 focus:border-b-solid focus:border-b-white rounded-none my-6 text-3xl sm:text-4xl lg:text-5xl lg:input-lg lg:px-0"</span>
 <span class="cstat-no" title="statement not covered" >              type="text"</span>
 <span class="cstat-no" title="statement not covered" >              name="topic"</span>
-<span class="cstat-no" title="statement not covered" >              placeholder="Topic"</span>
+<span class="cstat-no" title="statement not covered" >              placeholder="Title"</span>
 <span class="cstat-no" title="statement not covered" >              value={topic}</span>
 <span class="cstat-no" title="statement not covered" >              onChange={handleInputTopicChange}</span>
 <span class="cstat-no" title="statement not covered" >              autoFocus={true}</span>
@@ -1450,7 +1450,7 @@ export default Note;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-22T14:23:06.894Z
+                at 2024-01-22T15:52:09.921Z
             </div>
         <script src="prettify.js"></script>
         <script>
