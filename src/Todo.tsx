@@ -122,7 +122,7 @@ function Todo() {
       {isEditing ? (
         <form
           onSubmit={handleEditFormSubmit}
-          className={`fixed w-full h-full left-0 top-0 bg-black/40`}
+          className={`fixed w-full h-full left-0 top-0 bg-black/40 z-40`}
         >
           <div className="relative w-full h-full flex-col flex justify-center items-center">
             <h1 className="lg:text-xl my-4">แก้ไขสิ่งที่ต้องทำ</h1>
@@ -174,7 +174,7 @@ function Todo() {
       </button>
       {isCreate && !isSubmit ? (
         <form
-          className={`text-center w-full h-1/3 lg:w-auto lg:py-8 lg:px-16 rounded-box z-20 bg-base-100 fixed p-4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2`}
+          className={`text-center w-full h-auto -mt-10 lg:h-1/3 sm:w-1/2 lg:w-auto lg:py-8 lg:px-16 rounded-box z-20 bg-base-100 fixed p-4 pb-8 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2`}
           onSubmit={handleFormSubmit}
         >
           <h1 className="lg:text-xl">ลิสต์สิ่งที่ต้องทำ</h1>
