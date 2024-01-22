@@ -77,6 +77,14 @@ describe('Specific Functional Testing', () => {
     expect(getByText("new todo")).not.toHaveTextContent('new todo')
     expect(getByText("change todo")).toHaveTextContent('change todo')
   }
+  it("click delete"), () => {
+    const {getByPlaceholderText, getByTestId, getByText} = render(<Todo/>)
+    fireEvent.change(getByPlaceholderText(/สิ่งที่ต้องทำ/i), {target: { value: "new todo" }})
+    fireEvent.click(getByTestId("submit-create"))
+    expect(getByText("new todo")).toBeInTheDocument()
+    fireEvent.click(getByText("delete"))
+    expect(getByText("new todo")).not.toBeInTheDocument()
+  }
   it("test save data"), () => {
     const {getByTestId} = render(<Todo/>)
     expect(getByTestId("todo-area")).toHaveLength(3)

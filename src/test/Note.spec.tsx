@@ -69,6 +69,14 @@ describe('Specific Functional Testing', () => {
     expect(getByText("new note")).not.toBeInTheDocument()
     expect(getByText("change note")).toBeInTheDocument()
   }
+  it("click delete"), () => {
+    const {getByPlaceholderText, getByTestId, getByText} = render(<Note/>)
+    fireEvent.change(getByPlaceholderText(/สิ่งที่ต้องทำ/i), {target: { value: "new note" }})
+    fireEvent.click(getByTestId("submit-create"))
+    expect(getByText("new note")).toBeInTheDocument()
+    fireEvent.click(getByText("delete"))
+    expect(getByText("new note")).not.toBeInTheDocument()
+  }
   it("test save data"), () => {
     const {getByTestId} = render(<Note/>)
     expect(getByTestId("note-area")).toHaveLength(3)
