@@ -19,21 +19,21 @@ function Todo() {
   const [isEditing, setEditing] = useState<boolean>(false);
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [currentTodo, setCurrentTodo] = useState<any>({});
-  const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem("todos");
+  const [todos, setTodos] = useState<any>(() => {
+    const savedTodos:string | null = localStorage.getItem("todos");
     if (savedTodos) {
       return JSON.parse(savedTodos);
     } else {
       return [];
     }
   });
-  const [todo, setTodo] = useState("");
+  const [todo, setTodo] = useState<string>("");
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
     setCurrentTodo({
       ...currentTodo,
       text: e.target.value,
@@ -56,22 +56,22 @@ function Todo() {
     setTodos(updateItem);
   };
 
-  const handleEditFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEditFormSubmit = (e: React.FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
     handleUpdateTodo(currentTodo.id, currentTodo);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
     setTodo(e.target.value);
   };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
     if (todo !== "") {
       setTodos([
         ...todos,
         {
-          id: (Math.random() * 100).toFixed(0),
+          id: todos.length + 1,
           text: todo.trim(),
           checked: false,
         },
@@ -82,13 +82,14 @@ function Todo() {
     }
     setIsSubmit(true);
   };
-  const deleteData = (id: number) => {
-    const removeItem = todos.filter((todo: TodoApp) => {
-      return todo.id !== id;
+  const deleteData = (indexTodo: number):void => {
+    const removeItem = todos.filter((todo: TodoApp, index: number) => {
+      todo;
+      return index !== indexTodo;
     });
     setTodos(removeItem);
   };
-  const handleCheckedbox = (index: number) => {
+  const handleCheckedbox = (index: number):void => {
     const newTodos = [...todos];
     newTodos[index].checked = !newTodos[index].checked;
     setTodos(newTodos);
@@ -277,7 +278,7 @@ function Todo() {
                   </li>
                   <li
                     className="btn btn-ghost btn-sm"
-                    onClick={() => deleteData(todo.id)}
+                    onClick={() => deleteData(index)}
                   >
                     delete
                   </li>

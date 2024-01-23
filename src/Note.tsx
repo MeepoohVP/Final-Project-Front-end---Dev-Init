@@ -35,7 +35,7 @@ function Note() {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEditing, setEditing] = useState<boolean>(false);
   const [currentNote, setCurrentNote] = useState<any>({});
-  const [notes, setNotes] = useState(() => {
+  const [notes, setNotes] = useState<any>(() => {
     const savedNotes = localStorage.getItem("notes");
     if (savedNotes) {
       return JSON.parse(savedNotes);
@@ -43,8 +43,8 @@ function Note() {
       return [];
     }
   });
-  const [note, setNote] = useState("");
-  const [topic, setTopic] = useState("");
+  const [note, setNote] = useState<string>("");
+  const [topic, setTopic] = useState<string>("");
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
@@ -101,7 +101,7 @@ function Note() {
       setNotes([
         ...notes,
         {
-          id: (Math.random() * 100).toFixed(0),
+          id: notes.length + 1,
           topic: topic.trim(),
           text: note.trim(),
           date: getDate() + "/" + getMonth() + "/" + getYear(),
@@ -115,7 +115,7 @@ function Note() {
       setNotes([
         ...notes,
         {
-          id: (Math.random() * 100).toFixed(0),
+          id: notes.length + 1,
           topic: note.trim(),
           text: note.trim(),
           date: getDate() + "/" + getMonth() + "/" + getYear(),
@@ -129,9 +129,10 @@ function Note() {
       setTopic("");
     }
   };
-  const deleteData = (id: number) => {
-    const removeItem = notes.filter((note: NoteApp) => {
-      return note.id !== id;
+  const deleteData = (indexNote: number) => {
+    const removeItem = notes.filter((note: NoteApp, index: number) => {
+      note;
+      return index !== indexNote;
     });
     setNotes(removeItem);
   };
@@ -373,7 +374,7 @@ function Note() {
                     >
                       <li
                         className="btn btn-ghost btn-sm w-full rounded-box"
-                        onClick={() => deleteData(note.id)}
+                        onClick={() => deleteData(index)}
                       >
                         ลบโน๊ต
                       </li>
@@ -444,7 +445,7 @@ function Note() {
                     >
                       <li
                         className="btn btn-ghost btn-sm w-full rounded-box"
-                        onClick={() => deleteData(note.id)}
+                        onClick={() => deleteData(index)}
                       >
                         ลบโน๊ต
                       </li>
