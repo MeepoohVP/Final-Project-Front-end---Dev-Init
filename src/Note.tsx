@@ -2,100 +2,67 @@ import { useState, useEffect } from "react";
 function Note() {
   useEffect(() => {
     document.title = "Note";
-    let link:any = document.querySelector("link[rel~='icon']");
+    let link: any = document.querySelector("link[rel~='icon']");
     if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      document.getElementsByTagName('head')[0].appendChild(link);
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.getElementsByTagName("head")[0].appendChild(link);
     }
-    link.href = 'note.svg';
+    link.href = "note.svg";
   }, []);
-  const getDate = (): string => {
-    if (new Date().getDate().toString().length === 1) {
-      return "0" + new Date().getDate().toString();
-    }
-    return new Date().getDate().toString();
-  };
-  const getMonth = (): string => {
-    if (new Date().getMonth().toString().length === 1) {
-      return "0" + (new Date().getMonth() + 1).toString();
-    }
-    return (new Date().getMonth() + 1).toString();
-  };
-  const getYear = (): string => {
-    return new Date().getFullYear().toString();
-  };
+  const date: Date = new Date();
+  const getDate: string =
+    date.getDate().toString().length === 1
+      ? "0" + date.getDate().toString()
+      : date.getDate().toString();
+
+  const getMonth: string =
+    date.getMonth().toString().length === 1
+      ? "0" + (date.getMonth() + 1).toString()
+      : (date.getMonth() + 1).toString();
+
+  const getYear: string = date.getFullYear().toString();
+  function getDayNote(): string {
+    return getDate + "/" + getMonth + "/" + getYear;
+  }
   interface NoteApp {
     id: number;
     text: string;
     topic: string;
     date: any;
   }
-  const [isSubmit, setIsSubmit] = useState<boolean>(false);
-  const [isCreate, setIsCreate] = useState<boolean>(false);
-  const [isEditing, setEditing] = useState<boolean>(false);
-  const [currentNote, setCurrentNote] = useState<any>({});
+  const [note, setNote] = useState<string>("");
+  const [topic, setTopic] = useState<string>("");
   const [notes, setNotes] = useState<any>(() => {
-    const savedNotes = localStorage.getItem("notes");
+    const savedNotes:string|null = localStorage.getItem("notes");
     if (savedNotes) {
       return JSON.parse(savedNotes);
     } else {
       return [];
     }
   });
-  const [note, setNote] = useState<string>("");
-  const [topic, setTopic] = useState<string>("");
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [isCreate, setIsCreate] = useState<boolean>(false);
+  const [isEditing, setEditing] = useState<boolean>(false);
+  const [currentNote, setCurrentNote] = useState<any>({});
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
 
-  const handleEditInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCurrentNote({
-      ...currentNote,
-      text: e.target.value,
-      date: getDate() + "/" + getMonth() + "/" + getYear(),
-    });
-    console.log("Current todo: ", currentNote);
-  };
-  const handleEditTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentNote({
-      ...currentNote,
-      topic: e.target.value,
-      date: getDate() + "/" + getMonth() + "/" + getYear(),
-    });
-    console.log("Current todo: ", currentNote);
-  };
-  const editClick = (note: object): void => {
-    setEditing(true);
-    setCurrentNote({ ...note });
-  };
   const createClick = (): void => {
     setIsCreate(true);
     setIsSubmit(false);
   };
-  const handleUpdateNote = (id: number, updateTodo: object): void => {
-    const updateItem = notes.map((note: NoteApp) => {
-      return note.id === id ? updateTodo : note;
-    });
-    setEditing(false);
-    setNotes(updateItem);
-  };
-
-  const handleEditFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleUpdateNote(currentNote.id, currentNote);
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setNote(e.target.value);
-  };
-  const handleInputTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputTopicChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
     setTopic(e.target.value);
   };
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ):void => {
+    setNote(e.target.value);
+  };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
     if (topic !== "") {
       setNotes([
@@ -104,7 +71,7 @@ function Note() {
           id: notes.length + 1,
           topic: topic.trim(),
           text: note.trim(),
-          date: getDate() + "/" + getMonth() + "/" + getYear(),
+          date: getDayNote(),
         },
       ]);
       setNote("");
@@ -118,7 +85,7 @@ function Note() {
           id: notes.length + 1,
           topic: note.trim(),
           text: note.trim(),
-          date: getDate() + "/" + getMonth() + "/" + getYear(),
+          date: getDayNote(),
         },
       ]);
       setNote("");
@@ -129,12 +96,42 @@ function Note() {
       setTopic("");
     }
   };
-  const deleteData = (indexNote: number) => {
+  const deleteData = (indexNote: number):void => {
     const removeItem = notes.filter((note: NoteApp, index: number) => {
       note;
       return index !== indexNote;
     });
     setNotes(removeItem);
+  };
+  const handleEditInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>):void => {
+    setCurrentNote({
+      ...currentNote,
+      text: e.target.value,
+      date: getDayNote(),
+    });
+  };
+  const handleEditTopicChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    setCurrentNote({
+      ...currentNote,
+      topic: e.target.value,
+      date: getDayNote(),
+    });
+  };
+  const editClick = (note: NoteApp): void => {
+    setEditing(true);
+    setCurrentNote({ ...note });
+  };
+  const handleUpdateNote = (id: number, updateNote: NoteApp): void => {
+    const updateItem = notes.map((note: NoteApp) => {
+      return note.id === id ? updateNote : note;
+    });
+    setEditing(false);
+    setNotes(updateItem);
+  };
+
+  const handleEditFormSubmit = (e: React.FormEvent<HTMLFormElement>):void => {
+    e.preventDefault();
+    handleUpdateNote(currentNote.id, currentNote);
   };
   const [searchQuery, setSearchQuery] = useState<string>("");
   const filteredNotes = notes.filter(
@@ -197,7 +194,7 @@ function Note() {
             className={`bg-base-100 p-3 w-full h-full sm:h-auto sm:w-auto text-center flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:rounded-xl sm:shadow-[0_0_12px_0_rgba(255,255,255,0.3)]`}
           >
             <div className="self-start flex justify-between w-full">
-              <button onClick={() => setEditing(false)}>
+              <button type="reset" onClick={() => setEditing(false)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"

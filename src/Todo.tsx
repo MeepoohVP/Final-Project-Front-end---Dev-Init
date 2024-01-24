@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 function Todo() {
   useEffect(() => {
     document.title = "To-Do list";
-    let link:any = document.querySelector("link[rel~='icon']");
+    let link: any = document.querySelector("link[rel~='icon']");
     if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      document.getElementsByTagName('head')[0].appendChild(link);
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.getElementsByTagName("head")[0].appendChild(link);
     }
-    link.href = 'todo.svg';
+    link.href = "todo.svg";
   }, []);
   interface TodoApp {
     id: number;
@@ -20,7 +20,7 @@ function Todo() {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [currentTodo, setCurrentTodo] = useState<any>({});
   const [todos, setTodos] = useState<any>(() => {
-    const savedTodos:string | null = localStorage.getItem("todos");
+    const savedTodos: string | null = localStorage.getItem("todos");
     if (savedTodos) {
       return JSON.parse(savedTodos);
     } else {
@@ -33,39 +33,10 @@ function Todo() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
-    setCurrentTodo({
-      ...currentTodo,
-      text: e.target.value,
-    });
-    console.log("Current todo: ", currentTodo);
-  };
-  const editClick = (todo: TodoApp): void => {
-    setEditing(true);
-    setCurrentTodo({ ...todo });
-  };
-  const createClick = (): void => {
-    setIsCreate(true);
-    setIsSubmit(false);
-  };
-  const handleUpdateTodo = (id: number, updateTodo: object): void => {
-    const updateItem = todos.map((todo: TodoApp) => {
-      return todo.id === id ? updateTodo : todo;
-    });
-    setEditing(false);
-    setTodos(updateItem);
-  };
-
-  const handleEditFormSubmit = (e: React.FormEvent<HTMLFormElement>):void => {
-    e.preventDefault();
-    handleUpdateTodo(currentTodo.id, currentTodo);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTodo(e.target.value);
   };
-
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>):void => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (todo !== "") {
       setTodos([
@@ -82,19 +53,47 @@ function Todo() {
     }
     setIsSubmit(true);
   };
-  const deleteData = (indexTodo: number):void => {
+  const createClick = (): void => {
+    setIsCreate(true);
+    setIsSubmit(false);
+  };
+  const deleteData = (indexTodo: number): void => {
     const removeItem = todos.filter((todo: TodoApp, index: number) => {
       todo;
       return index !== indexTodo;
     });
     setTodos(removeItem);
   };
-  const handleCheckedbox = (index: number):void => {
+  const handleCheckedbox = (index: number): void => {
     const newTodos = [...todos];
     newTodos[index].checked = !newTodos[index].checked;
     setTodos(newTodos);
-    console.log(index);
   };
+  const handleEditInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setCurrentTodo({
+      ...currentTodo,
+      text: e.target.value,
+    });
+  };
+  const editClick = (todo: TodoApp): void => {
+    setEditing(true);
+    setCurrentTodo({ ...todo });
+  };
+  const handleUpdateTodo = (id: number, updateTodo: object): void => {
+    const updateItem = todos.map((todo: TodoApp) => {
+      return todo.id === id ? updateTodo : todo;
+    });
+    setEditing(false);
+    setTodos(updateItem);
+  };
+
+  const handleEditFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    handleUpdateTodo(currentTodo.id, currentTodo);
+  };
+
   return (
     <>
       <header className="relative flex ml-6 md:justify-center md:ml-0 pt-2">
@@ -228,65 +227,63 @@ function Todo() {
         data-testid="todo-area"
         className="todo-list mt-12 lg:w-1/2 lg:mx-auto mx-12 md:mx-32 lg:px-20"
       >
-        {
-          todos.map((todo: TodoApp, index: number) => (
-            <li
-              data-testid={todo.id.toString()}
+        {todos.map((todo: TodoApp, index: number) => (
+          <li
+            data-testid={todo.id.toString()}
+            key={index}
+            value={todo.id}
+            className={`mb-12 flex items-center justify-between`}
+          >
+            {" "}
+            <input
               key={index}
               value={todo.id}
-              className={`mb-12 flex items-center justify-between`}
-            >
-              {" "}
-              <input
-                key={index}
-                value={todo.id}
-                type="checkbox"
-                checked={todo.checked}
-                className={`checkbox checkbox-sm mr-2 rounded-full opacity-75
+              type="checkbox"
+              checked={todo.checked}
+              className={`checkbox checkbox-sm mr-2 rounded-full opacity-75
           ${todo.checked ? "checkbox-accent" : ""}`}
-                onChange={() => handleCheckedbox(index)}
-              />{" "}
-              <p
-                className={`flex-1 break-all md:text-xl lg:text-lg ${
-                  todo.checked ? "opacity-30 line-through" : ""
-                }`}
-              >
-                {todo.text}
-              </p>
-              <div className="dropdown">
-                <div role="button" className="btn btn-ghost" tabIndex={0}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-three-dots-vertical"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                  </svg>
-                </div>
-                <ul
-                  tabIndex={0}
-                  className="p-2 shadow menu dropdown-content z-[1] bg-neutral w-auto rounded-box"
+              onChange={() => handleCheckedbox(index)}
+            />{" "}
+            <p
+              className={`flex-1 break-all md:text-xl lg:text-lg ${
+                todo.checked ? "opacity-30 line-through" : ""
+              }`}
+            >
+              {todo.text}
+            </p>
+            <div className="dropdown">
+              <div role="button" className="btn btn-ghost" tabIndex={0}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-three-dots-vertical"
+                  viewBox="0 0 16 16"
                 >
-                  <li
-                    className="btn btn-ghost btn-sm"
-                    onClick={() => editClick(todo)}
-                  >
-                    edit
-                  </li>
-                  <li
-                    className="btn btn-ghost btn-sm"
-                    onClick={() => deleteData(index)}
-                  >
-                    delete
-                  </li>
-                </ul>
-              </div>{" "}
-            </li>
-          ))
-        }
+                  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                </svg>
+              </div>
+              <ul
+                tabIndex={0}
+                className="p-2 shadow menu dropdown-content z-[1] bg-neutral w-auto rounded-box"
+              >
+                <li
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => editClick(todo)}
+                >
+                  edit
+                </li>
+                <li
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => deleteData(index)}
+                >
+                  delete
+                </li>
+              </ul>
+            </div>{" "}
+          </li>
+        ))}
       </ul>
     </>
   );

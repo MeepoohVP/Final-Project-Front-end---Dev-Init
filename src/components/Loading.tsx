@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 function Loading() {
   const [loading, setLoading] = useState(false);
-  console.log(window.location.pathname);
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
