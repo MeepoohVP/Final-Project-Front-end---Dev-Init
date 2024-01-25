@@ -1,4 +1,4 @@
-﻿# To-Do list and Note web Application
+# To-Do list and Note web Application
 ## Language & Framework
 >- React + typescript
 >- TailwindCSS
@@ -45,3 +45,4 @@
 4. ### Specific Functional Testing
    - To-Do list and Note page can be created and edited.
    - To-Do list and Note page can be save data.
+   - To-Do list and Note page can be delete data.
